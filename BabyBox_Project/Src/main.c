@@ -75,7 +75,6 @@ static void MX_TIM2_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_USART3_UART_Init(void);
-static void MX_NVIC_Init(void);
                                     
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
                                 
@@ -83,7 +82,6 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
 
-void testLEDinit(void);
 static void EXTI1_IRQHandler_Config(void);
 static void EXTI4_IRQHandler_Config(void);
 static void EXTI9_5_IRQHandler_Config(void);
@@ -129,8 +127,6 @@ int main(void)
   MX_USART3_UART_Init();
 
   /* Initialize interrupts */
-  MX_NVIC_Init();
-
   EXTI1_IRQHandler_Config();
   EXTI4_IRQHandler_Config();
   EXTI9_5_IRQHandler_Config();
@@ -225,43 +221,6 @@ void SystemClock_Config(void)
   HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
 }
 
-/**
-  * @brief NVIC Configuration.
-  * @retval None
-  */
-static void MX_NVIC_Init(void)
-{
-  /* EXTI1_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(EXTI1_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(EXTI1_IRQn);
-  /* EXTI4_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(EXTI4_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(EXTI4_IRQn);
-  /* EXTI9_5_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
-  /* TIM2_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(TIM2_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(TIM2_IRQn);
-  /* USART1_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(USART1_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(USART1_IRQn);
-  /* USART2_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(USART2_IRQn);
-  /* USART3_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(USART3_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(USART3_IRQn);
-  /* EXTI15_10_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
-  /* I2C1_EV_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(I2C1_EV_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(I2C1_EV_IRQn);
-  /* I2C1_ER_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(I2C1_ER_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(I2C1_ER_IRQn);
-}
 
 /* I2C1 init function */
 static void MX_I2C1_Init(void)
