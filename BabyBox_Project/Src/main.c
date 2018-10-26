@@ -47,6 +47,8 @@
 #include "device_PIRsensor.h"
 #include "device_buzzer.h"
 #include "device_button.h"
+#include "ssd1306.h"
+#include "fonts.h"
 #include "stateMachine.h"
 /* USER CODE END Includes */
 
@@ -120,6 +122,11 @@ int main(void)
 #if 0
   MX_GPIO_Init();
 #else
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+
   MX_I2C1_Init();
   MX_TIM2_Init();
   MX_USART1_UART_Init();
@@ -153,9 +160,32 @@ int main(void)
 
   changeingState = initialize_state();
 
-  //uint8_t Welcome[] = "Welcome";
-  //HAL_UART_Transmit(&huart1, (uint8_t*)Welcome, sizeof(Welcome), 10);		// TESTING
+// uint8_t Welcome[] = "Welcome";
+// HAL_UART_Transmit(&huart1, (uint8_t*)Welcome, sizeof(Welcome), 10);		// TESTING
   printf("Welcome!!");
+
+#if 1	// OLED TEST
+  ssd1306_Init();
+
+  HAL_Delay(1000);
+  ssd1306_Fill(White);
+  ssd1306_UpdateScreen();
+
+  HAL_Delay(50);
+
+  ssd1306_SetCursor(23,23);
+  ssd1306_WriteString("Hello World",Font_11x18,Black);
+  ssd1306_UpdateScreen();
+
+  HAL_Delay(2000);
+  ssd1306_Fill(White);		// For Clear
+  ssd1306_UpdateScreen();
+
+  ssd1306_SetCursor(5,23);
+  ssd1306_WriteString("World Wide",Font_11x18,Black);
+  ssd1306_UpdateScreen();
+
+#endif
 
   while(1)
   {
