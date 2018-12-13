@@ -60,7 +60,7 @@
 void MX_GPIO_Init(void)
 {
 
-  GPIO_InitTypeDef GPIO_InitStruct;
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOC_CLK_ENABLE();
@@ -69,12 +69,12 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, LoadCell_CLK_Pin|Buzzer_CTRL_Pin|ELECTROMAGNET_CTRL_1_Pin|ELECTROMAGNET_CTRL_2_Pin 
+  HAL_GPIO_WritePin(GPIOB, UltraSonic_TRIG_Pin|Buzzer_CTRL_Pin|ELECTROMAGNET_CTRL_1_Pin|ELECTROMAGNET_CTRL_2_Pin 
                           |BAR_LED_CTRL_1_Pin|LED_G_EXTERNAL_Pin|LED_B_EXTERNAL_Pin|Buzzer_CTRL_EXTRNAL_Pin 
                           |GPIO_PIN_8|GPIO_PIN_9, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, BAR_LED_CTRL_2_Pin|USER_LED_STATUS_Pin|LED_R_EXTERNAL_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, BAR_LED_CTRL_1A8_Pin|USER_LED_STATUS_Pin|LED_R_EXTERNAL_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : PC13 PC14 PC15 */
   GPIO_InitStruct.Pin = GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15;
@@ -82,22 +82,16 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PAPin PAPin PAPin PAPin */
-  GPIO_InitStruct.Pin = PHOTO_1_EXTI4_Pin|PHOTO_2_EXTI5_Pin|PIR_EXTI6_Pin|USER_KEY_1_EXTI_Pin;
+  /*Configure GPIO pins : PAPin PAPin PAPin */
+  GPIO_InitStruct.Pin = PHOTO_1_EXTI4_Pin|PHOTO_2_EXTI5_Pin|USER_KEY_1_EXTI_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PtPin */
-  GPIO_InitStruct.Pin = LoadCell_DT_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(LoadCell_DT_GPIO_Port, &GPIO_InitStruct);
-
   /*Configure GPIO pins : PBPin PBPin PBPin PBPin 
                            PBPin PBPin PBPin PBPin 
                            PB8 PB9 */
-  GPIO_InitStruct.Pin = LoadCell_CLK_Pin|Buzzer_CTRL_Pin|ELECTROMAGNET_CTRL_1_Pin|ELECTROMAGNET_CTRL_2_Pin 
+  GPIO_InitStruct.Pin = UltraSonic_TRIG_Pin|Buzzer_CTRL_Pin|ELECTROMAGNET_CTRL_1_Pin|ELECTROMAGNET_CTRL_2_Pin 
                           |BAR_LED_CTRL_1_Pin|LED_G_EXTERNAL_Pin|LED_B_EXTERNAL_Pin|Buzzer_CTRL_EXTRNAL_Pin 
                           |GPIO_PIN_8|GPIO_PIN_9;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -118,24 +112,26 @@ void MX_GPIO_Init(void)
   HAL_GPIO_Init(BOOT1_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PAPin PAPin PAPin */
-  GPIO_InitStruct.Pin = BAR_LED_CTRL_2_Pin|USER_LED_STATUS_Pin|LED_R_EXTERNAL_Pin;
+  GPIO_InitStruct.Pin = BAR_LED_CTRL_1A8_Pin|USER_LED_STATUS_Pin|LED_R_EXTERNAL_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI1_IRQn, 3, 0);
+  HAL_NVIC_EnableIRQ(EXTI1_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI4_IRQn, 4, 0);
+  HAL_NVIC_EnableIRQ(EXTI4_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 1, 0);
+  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
 }
 
 /* USER CODE BEGIN 2 */
 
 /* USER CODE END 2 */
-
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

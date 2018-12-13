@@ -1,3 +1,4 @@
+/* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * @file           : main.h
@@ -36,36 +37,57 @@
   *
   ******************************************************************************
   */
+/* USER CODE END Header */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __MAIN_H__
-#define __MAIN_H__
+#ifndef __MAIN_H
+#define __MAIN_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /* Includes ------------------------------------------------------------------*/
+#include "stm32f1xx_hal.h"
 
+/* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
 
-/* Private define ------------------------------------------------------------*/
+/* Exported types ------------------------------------------------------------*/
+/* USER CODE BEGIN ET */
 
-#define PWM_CH1_Pin GPIO_PIN_0
-#define PWM_CH1_GPIO_Port GPIOA
-#define PWM_CH2_Pin GPIO_PIN_1
-#define PWM_CH2_GPIO_Port GPIOA
+/* USER CODE END ET */
+
+/* Exported constants --------------------------------------------------------*/
+/* USER CODE BEGIN EC */
+
+/* USER CODE END EC */
+
+/* Exported macro ------------------------------------------------------------*/
+/* USER CODE BEGIN EM */
+
+/* USER CODE END EM */
+
+/* Exported functions prototypes ---------------------------------------------*/
+void Error_Handler(void);
+
+/* USER CODE BEGIN EFP */
+
+/* USER CODE END EFP */
+
+/* Private defines -----------------------------------------------------------*/
 #define PHOTO_1_EXTI4_Pin GPIO_PIN_4
 #define PHOTO_1_EXTI4_GPIO_Port GPIOA
 #define PHOTO_1_EXTI4_EXTI_IRQn EXTI4_IRQn
 #define PHOTO_2_EXTI5_Pin GPIO_PIN_5
 #define PHOTO_2_EXTI5_GPIO_Port GPIOA
 #define PHOTO_2_EXTI5_EXTI_IRQn EXTI9_5_IRQn
-#define PIR_EXTI6_Pin GPIO_PIN_6
-#define PIR_EXTI6_GPIO_Port GPIOA
-#define PIR_EXTI6_EXTI_IRQn EXTI9_5_IRQn
-#define LoadCell_DT_Pin GPIO_PIN_7
-#define LoadCell_DT_GPIO_Port GPIOA
-#define LoadCell_CLK_Pin GPIO_PIN_0
-#define LoadCell_CLK_GPIO_Port GPIOB
+#define UltraSonic_ECHO_Pin GPIO_PIN_6
+#define UltraSonic_ECHO_GPIO_Port GPIOA
+#define UltraSonic_TRIG_Pin GPIO_PIN_0
+#define UltraSonic_TRIG_GPIO_Port GPIOB
 #define Emergence_BTN_EXTI1_Pin GPIO_PIN_1
 #define Emergence_BTN_EXTI1_GPIO_Port GPIOB
 #define Emergence_BTN_EXTI1_EXTI_IRQn EXTI1_IRQn
@@ -79,13 +101,12 @@
 #define ELECTROMAGNET_CTRL_2_GPIO_Port GPIOB
 #define BAR_LED_CTRL_1_Pin GPIO_PIN_15
 #define BAR_LED_CTRL_1_GPIO_Port GPIOB
-#define BAR_LED_CTRL_2_Pin GPIO_PIN_8
-#define BAR_LED_CTRL_2_GPIO_Port GPIOA
+#define BAR_LED_CTRL_1A8_Pin GPIO_PIN_8
+#define BAR_LED_CTRL_1A8_GPIO_Port GPIOA
 #define USER_LED_STATUS_Pin GPIO_PIN_11
 #define USER_LED_STATUS_GPIO_Port GPIOA
 #define USER_KEY_1_EXTI_Pin GPIO_PIN_12
 #define USER_KEY_1_EXTI_GPIO_Port GPIOA
-#define USER_KEY_1_EXTI_EXTI_IRQn EXTI15_10_IRQn
 #define LED_R_EXTERNAL_Pin GPIO_PIN_15
 #define LED_R_EXTERNAL_GPIO_Port GPIOA
 #define LED_G_EXTERNAL_Pin GPIO_PIN_3
@@ -94,28 +115,14 @@
 #define LED_B_EXTERNAL_GPIO_Port GPIOB
 #define Buzzer_CTRL_EXTRNAL_Pin GPIO_PIN_5
 #define Buzzer_CTRL_EXTRNAL_GPIO_Port GPIOB
-
-/* ########################## Assert Selection ############################## */
-/**
-  * @brief Uncomment the line below to expanse the "assert_param" macro in the 
-  *        HAL drivers code
-  */
-/* #define USE_FULL_ASSERT    1U */
-
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
- extern "C" {
-#endif
-void _Error_Handler(char *, int);
-
-#define Error_Handler() _Error_Handler(__FILE__, __LINE__)
-#ifdef __cplusplus
 }
 #endif
 
-#endif /* __MAIN_H__ */
+#endif /* __MAIN_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
