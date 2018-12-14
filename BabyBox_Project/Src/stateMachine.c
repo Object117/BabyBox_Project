@@ -121,11 +121,6 @@ USER_ACTION* change_state(void) {
 
 void STANDBY_inner_door_open(void) {
 	printf("State : STANDBY\n");
-
-
-
-	changeingState = tReady_state;			// <<--------_TEST_CODE    YOU SHOULD REMOVE THIS.
-
 }
 
 void STANDBY_inner_door_close(void) {
@@ -146,51 +141,6 @@ void STANDBY_extdoor_open(void) {
 }
 
 void STANDBY_extdoor_close(void) {
-
-#if 0		// testCode
-	int temp = 0;
-	CountByTick();
-
-	Distance = (int)(IC2_Val_2 - IC2_Val_1);
-
-	if(IC2_Val_1 > IC2_Val_2) {
-		Distance = 0;
-	}
-	else {
-
-
-//		sprintf(DisplayBuff2, "%d", PrevDistance);
-//		printf("PrevDistance - %s\n", DisplayBuff2);
-
-//		sprintf(DisplayBuff, "%d", Distance);
-//		printf("Distance - %s\n", DisplayBuff);
-
-		if(PrevDistance != Distance) {
-			temp = (int)(PrevDistance - Distance);
-			sprintf(DisplayBuff3, "%d", temp);
-			printf("_______________________Diff : %s\n", DisplayBuff3);
-		}
-
-		if(DistRdyCount > 5) {
-
-			if(temp > 5000) {
-				Distance = 0;
-			}
-			else {
-				if(temp > 600) {
-					sprintf(DisplayBuff, "%d", temp);
-					printf("temp : %s\n", DisplayBuff);
-					  changeingState = tReady_state;
-				}
-			}
-		}
-		else {
-			DistRdyCount++;
-		}
-		PrevDistance = Distance;
-	}
-	HAL_Delay(100);
-#endif
 
 }
 
@@ -227,7 +177,7 @@ void READY_extdoor_open(void) {
 
 void READY_extdoor_close(void) {
 	if(extdoor_status == EXT_DOOR_CLOSE) {
-//		changeingState = tStandby_state;				------- YOU SHOULD REMOVE //
+		changeingState = tStandby_state;
 	}
 }
 
@@ -361,7 +311,7 @@ void CONFIRM_baby_in(void) {
 void CONFIRM_baby_none(void) {
 
 #if 1
-	ultraSonic_triggerNextStep(tEnter_state, BABY_NONE, 600, 5000);
+	ultraSonic_triggerNextStep(tExit_state, BABY_NONE, 600, 5000);
 #else		// ORIG
 	if(baby_state == BABY_IN) {
 		changeingState = tExit_state;
@@ -417,7 +367,7 @@ void EXIT_baby_none(void) {
  * __________________________________________
  */
 void EMER_inner_door_open(void) {
-	printf("State : EMERGENCY !!! \n");
+//	printf("State : EMERGENCY !!! \n");
 }
 
 void EMER_inner_door_close(void) {
@@ -452,7 +402,7 @@ void EMER_baby_none(void) {
  * __________________________________________
  */
 void RECOVERY_inner_door_open(void) {
-	printf("State : RECOVERY\n");
+//	printf("State : RECOVERY\n");
 }
 
 void RECOVERY_inner_door_close(void) {

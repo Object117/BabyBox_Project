@@ -136,7 +136,6 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
-#if 1		// ORIG
   MX_GPIO_Init();
   MX_I2C1_Init();
   MX_USART1_UART_Init();
@@ -150,6 +149,7 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim1);
   HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_1);
   HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_2);
+#if 1
 #else		// ORIG
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
@@ -297,7 +297,7 @@ static void EXTI9_5_IRQHandler_Config(void) {		// Inner Photo Interrupter // PIR
 void HAL_GPIO_EXTI_Callback(uint16_t Action) {
 
 	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_11);
-
+	printf("______________________CallBack In\n");
 	if(Action == EXT_DOOR_PIN) {
 		switch(HAL_GPIO_ReadPin(EXT_DOOR_PORT, EXT_DOOR_PIN)) {
 			case GPIO_PIN_SET	:
