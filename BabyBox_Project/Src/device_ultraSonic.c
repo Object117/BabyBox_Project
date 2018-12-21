@@ -23,9 +23,11 @@ void CountByTick(int turnOffOn) {
 	if((HAL_GetTick() - prevTick) > SELECT_TIME) {
 		prevTick = HAL_GetTick();
 		if(turnOffOn == TRIG_SET) {
+			printf("TRIG_SET__________________\n");
 			SetSonicTrigger = TRIG_SET;
 		}
 		else {		//turnOffOn == TRIG_RELEASE
+			printf("TRIG_RELASE____________\n");
 			SetSonicTrigger = TRIG_RELEASE;
 		}
 	}
@@ -112,6 +114,7 @@ void ultraSonic_triggerNextStep(USER_ACTION* nextStep, BABY_ACTION isThereBaby, 
 					sprintf(DisplayBuff, "%d", diffDistance);
 					printf("temp : %s\n", DisplayBuff);
 					  changeingState = nextStep;
+					  DistRdyCount = 0;
 				}
 			}
 		}

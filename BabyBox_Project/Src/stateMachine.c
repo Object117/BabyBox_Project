@@ -120,7 +120,7 @@ USER_ACTION* change_state(void) {
  */
 
 void STANDBY_inner_door_open(void) {
-	printf("State : STANDBY\n");
+		printf("State : STANDBY\n");
 }
 
 void STANDBY_inner_door_close(void) {
@@ -183,7 +183,7 @@ void READY_extdoor_close(void) {
 
 void READY_baby_in(void) {
 #if 1
-	ultraSonic_triggerNextStep(tEnter_state, BABY_IN, 600, 5000);
+	ultraSonic_triggerNextStep(tEnter_state, BABY_IN, 400, 5000);
 
 #else		// ORIG
 	if(baby_state == BABY_IN) {
@@ -311,7 +311,7 @@ void CONFIRM_baby_in(void) {
 void CONFIRM_baby_none(void) {
 
 #if 1
-	ultraSonic_triggerNextStep(tExit_state, BABY_NONE, 600, 5000);
+	ultraSonic_triggerNextStep(tExit_state, BABY_NONE, 400, 5000);
 #else		// ORIG
 	if(baby_state == BABY_IN) {
 		changeingState = tExit_state;
@@ -367,7 +367,7 @@ void EXIT_baby_none(void) {
  * __________________________________________
  */
 void EMER_inner_door_open(void) {
-//	printf("State : EMERGENCY !!! \n");
+	printf("State : EMERGENCY !!! \n");
 }
 
 void EMER_inner_door_close(void) {
